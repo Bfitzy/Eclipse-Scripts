@@ -39,7 +39,7 @@ namespace VMS.TPS
                 Structure cm2 = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("2cm")).Single();
                 Structure chestwall = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("chestwall")).Single();
                 //Structure ptvgtv = plan.StructureSet.Structures.Where(s=> s.Id.ToLower().Contains("ptv-gtv do")).Single();
-                //Structure brachiplex = plan.StructureSet.Structures.Where(s=> s.Id.ToLower().Contains("brachial plexus")).Single();
+                Structure brachiplex = plan.StructureSet.Structures.Where(s=> s.Id.ToLower().Contains("brachial plexus")).Single();
                 Structure skin = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("skin")).Single();
                 Structure body = plan.StructureSet.Structures.Where(s => s.Id == "BODY").Single();
                 Structure mm2 = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("2mm")).Single();
