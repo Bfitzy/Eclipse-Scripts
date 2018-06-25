@@ -1,0 +1,22 @@
+Aorta 10cc volume min dose:,1757.9 cGy
+Aorta max point dose:,4022.5 cGy
+Spinal Cord V2250:,0 cc,Pass
+PTV Volume: 21.27 cc
+D50_volume / PTV volume:,3.98,Pass
+Lung V20:,3.85,Pass
+V100 / PTV:,1.03,Pass
+D50_volume / PTV volume:,3.98,Pass
+Brachial Plexus volume @30Gy:,0 cc,Pass
+Brachial Plexus max point dose:,2902.5 cGy,Pass
+Heart V@32 Gy:,0 cc,Pass
+Heart Point Max:,1930.3 cGy,Pass
+Trachea V@18 Gy:, 0 cc,Pass
+Trachea Point Max:,54.8 cGy,Pass
+Skin V@30 Gy:,0 cc,Pass
+Skin Point Max:,1378.6 cGy,Pass
+Chest Wall V@30 Gy:,0 cc,Pass
+Right Lung V@12.5 Gy:,207.91 cc,Pass
+Left Lung V@12.5 Gy:,1.05 cc,Pass
+Right Lung V@13.5 Gy:,187.75 cc,Pass
+Left Lung V@13.5 Gy:,0.5 cc,Pass
+
