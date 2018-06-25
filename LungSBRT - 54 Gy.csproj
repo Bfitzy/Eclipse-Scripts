@@ -56,7 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LungSBRT - 54 Gy.cs" />
+    <Compile Include="LungSBRT - 50 Gy.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="VMS.TPS.Common.Model.API.dll" />
