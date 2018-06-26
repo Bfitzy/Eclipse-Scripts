@@ -44,7 +44,8 @@ namespace VMS.TPS
                 Structure body = plan.StructureSet.Structures.Where(s => s.Id == "BODY").Single();
                 Structure mm2 = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("2mm")).Single();
                 Structure lungTotal = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("lung total")).Single();
-
+			
+				DoseValue bronchP = plan.GetDVHCumulativeData(proxbronch, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
             DoseValue cordDG = new DoseValue(2250, DoseValue.DoseUnit.cGy);
                 DoseValue cordPG = new DoseValue(3000, DoseValue.DoseUnit.cGy);
                 DoseValue esophaDG = new DoseValue(2750, DoseValue.DoseUnit.cGy);
@@ -103,7 +104,7 @@ namespace VMS.TPS
                 DoseValue skinP = plan.GetDVHCumulativeData(skin, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
                 //DoseValue stomachP = plan.GetDVHCumulativeData(stomach, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
                 DoseValue chestP = plan.GetDVHCumulativeData(chestwall, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
-            DoseValue bronchP = plan.GetDVHCumulativeData(proxbronch, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
+            
 
 
             double hetero = 500000 / ptvmax.Dose;
