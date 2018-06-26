@@ -95,6 +95,7 @@ namespace VMS.TPS
             DoseValue cordP = plan.GetDVHCumulativeData(cord, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
             DoseValue mm2P = plan.GetDVHCumulativeData(mm2, DoseValuePresentation.Relative, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
             DoseValue aortaP = plan.GetDVHCumulativeData(aorta, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
+MessageBox.Show("Done");
                 DoseValue brachiP = plan.GetDVHCumulativeData(proxbronch, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
                 DoseValue heartP = plan.GetDVHCumulativeData(heart, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
                 DoseValue tracheaP = plan.GetDVHCumulativeData(proxtrachea, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
