@@ -26,10 +26,10 @@ namespace VMS.TPS
                 Structure PTV = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("ptv")).First();
                 Structure cord = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("cord")).First();
                 Structure cord05 = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("cord +0.5")).Single();
-                Structure proxbronch = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("proxbronchtree")).First();
-                Structure proxbronch2 = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("proxbronchtree+2")).SingleOrDefault();
+                Structure proxbronch = plan.StructureSet.Structures.Where(s => s.Id == "ProxBronchTree").SingleOrDefault();
+                //Structure proxbronch2 = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("proxbronchtree+2")).SingleOrDefault();
                 Structure lungR = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("lung r")).First();
-            Structure lungL = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("lung l")).First();
+				Structure lungL = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("lung l")).First();
                 Structure heart = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("heart")).First();
                 //Structure ITV = plan.StructureSet.Structures.Where(s=> s.Id.ToLower().Contains("itv")).First();
                 //Structure GTV = plan.StructureSet.Structures.Where(s => s.Id.ToLower().Contains("gtvp")).First();
@@ -72,7 +72,7 @@ namespace VMS.TPS
                 double V20 = plan.GetVolumeAtDose(lungTotal, v20G, VolumePresentation.Relative);
 
                 double esophagV = plan.GetVolumeAtDose(esophagus, esophaDG, VolumePresentation.AbsoluteCm3);
-                double brachiV = plan.GetVolumeAtDose(proxbronch, brachiDG, VolumePresentation.AbsoluteCm3);
+                double brachiV = plan.GetVolumeAtDose(brachiplex, brachiDG, VolumePresentation.AbsoluteCm3);
                 double heartV = plan.GetVolumeAtDose(heart, brachiPG, VolumePresentation.AbsoluteCm3);
                 double tracheaV = plan.GetVolumeAtDose(proxtrachea, tracheaDG, VolumePresentation.AbsoluteCm3);
                 double skinV = plan.GetVolumeAtDose(skin, cordPG, VolumePresentation.AbsoluteCm3);
@@ -97,7 +97,7 @@ namespace VMS.TPS
             DoseValue mm2P = plan.GetDVHCumulativeData(mm2, DoseValuePresentation.Relative, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
             DoseValue aortaP = plan.GetDVHCumulativeData(aorta, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
 
-                DoseValue brachiP = plan.GetDVHCumulativeData(proxbronch, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
+                DoseValue brachiP = plan.GetDVHCumulativeData(brachiplex, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
                 DoseValue heartP = plan.GetDVHCumulativeData(heart, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
                 DoseValue tracheaP = plan.GetDVHCumulativeData(proxtrachea, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
                 DoseValue skinP = plan.GetDVHCumulativeData(skin, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
