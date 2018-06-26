@@ -82,11 +82,12 @@ namespace VMS.TPS
                 double lung15LV = plan.GetVolumeAtDose(lungL, lung15, VolumePresentation.AbsoluteCm3);
                 double lung10RV = plan.GetVolumeAtDose(lungR, lung10, VolumePresentation.AbsoluteCm3);
                 double lung10LV = plan.GetVolumeAtDose(lungL, lung10, VolumePresentation.AbsoluteCm3);
-            double cov100 = plan.GetVolumeAtDose(PTV, v100G, VolumePresentation.Relative);
-            double cov90 = plan.GetVolumeAtDose(PTV, v90, VolumePresentation.Relative);
+            DoseValue cov100 = plan.GetDoseAtVolume(PTV, 95, VolumePresentation.Relative, DoseValuePresentation.Relative);
+            DoseValue cov90 = plan.GetDoseAtVolume(PTV, 99, VolumePresentation.Relative, DoseValuePresentation.Relative);
             double aortaV = plan.GetVolumeAtDose(aorta, aortaDG, VolumePresentation.AbsoluteCm3);
             double cm2v = plan.GetVolumeAtDose(cm2, v105, VolumePresentation.AbsoluteCm3);
             double bronchV = plan.GetVolumeAtDose(proxbronch, esophaPG, VolumePresentation.AbsoluteCm3);
+            double relativeSpillage = (cm2v / PTV_vol) * 100;
 
 
             DoseValue ptvmax = plan.GetDVHCumulativeData(PTV, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
@@ -95,7 +96,7 @@ namespace VMS.TPS
             DoseValue cordP = plan.GetDVHCumulativeData(cord, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
             DoseValue mm2P = plan.GetDVHCumulativeData(mm2, DoseValuePresentation.Relative, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
             DoseValue aortaP = plan.GetDVHCumulativeData(aorta, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
-MessageBox.Show("Done");
+
                 DoseValue brachiP = plan.GetDVHCumulativeData(proxbronch, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
                 DoseValue heartP = plan.GetDVHCumulativeData(heart, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
                 DoseValue tracheaP = plan.GetDVHCumulativeData(proxtrachea, DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MaxDose;
@@ -107,11 +108,12 @@ MessageBox.Show("Done");
 
             double hetero = 500000 / ptvmax.Dose;
             finalSummary += "Objective,Actual,Pass-Fail\nCoverage\n";
-            finalSummary += "95% of PTV covered by 100% of Pres Dose," + Math.Round(cov100, 2) + "%," + PWF(20, 5, 100 - cov100) + '\n';
-            finalSummary += "99% of PTV receives minimum of 90% prescribed dose," + Math.Round(cov90, 2) + "%," + PWF(5, 1, 100 - cov90) + '\n';
+            finalSummary += "95% of PTV covered by 100% of Pres Dose," + cov100.ToString() + "% of prescribed dose," + PWF(5, 1, 100 - cov100.Dose) + '\n';
+            finalSummary += "99% of PTV receives minimum of 90% prescribed dose," + cov90.ToString() + "% of prescribed dose," + PWF(20, 10, 100 - cov90.Dose) + '\n';
             finalSummary += "Dose Heterogeneity - Target Dose > 60% 0f PTV Max," + Math.Round(hetero, 2) + "%," + PWF(60, 40, 100 - hetero) + '\n';
-            finalSummary += "High Dose Spillage - No Dose Greater than 105% outside PTV," + cm2P.ToString() + ',' + PWF(130, 105, cm2P.Dose) + '\n';
-            finalSummary += "Spillage Volume:," + Math.Round(cm2v, 2) + " cc," + PWF(10, 1, cm2v) + '\n';
+            finalSummary += "High Dose Spillage - No Dose Greater than 105% outside PTV," + cm2P.ToString() + " outside ptv," + PWF(140, 105, cm2P.Dose) + '\n';
+            finalSummary += "Spillage Volume:," + Math.Round(cm2v, 2) + " cc," + '\n';
+            finalSummary += "Relative Spillage: (<15% of PTV vol)," + Math.Round(relativeSpillage, 2) + '%' + " of PTV vol," + PWF(15, 5, relativeSpillage) + '\n';
             finalSummary += "PTV Volume:," + Math.Round(PTV_vol, 2) + " cc" + '\n';
             finalSummary += "V100 / PTV:," + Math.Round(D100_vol / PTV_vol, 2) + ',' + PWF(1.5, 1.2, D100_vol / PTV_vol) + '\n';
             finalSummary += "V50 Volume:," + Math.Round(D50_vol, 2) + " cc\n";
@@ -153,7 +155,7 @@ MessageBox.Show("Done");
                 StreamWriter Sw = new StreamWriter("v:\\Special_Phys_Reports\\"+patient.LastName + '_'+patient.Id+"Lung_5x10.csv");
                 Sw.WriteLine(finalSummary);
                 Sw.Close();
-
+            MessageBox.Show("Done");
 
 
         }
